@@ -1,0 +1,7 @@
+{
+  "name": "OM1 Real-Data Forecasting Decision Presentation",
+  "description": "Interactive 5-minute infographic video presentation and technical defense simulator for Applied Study 1: Real-Data Forecasting Decision Challenge in Operations Management 1 (BSIE 3-E).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
