@@ -1,17 +1,17 @@
 /**
  * "The Forecast: Port of Los Angeles Monthly Export Volume (TEUs)"
  * Applied Study 1: Real-Data Forecasting Decision Challenge
- * IE-PC 3112: Operations Management 1 · BSIE 3-E · Group 7 · Cebu Technological University
- * 
- * Master Presentation Keynote: 7 Comprehensive Operational Beats (270 Seconds · 4:30 Minutes)
- * 
- * Beat 0 (25s): Prologue — Meet Group 7 & Port Background
- * Beat 1 (40s): Act I — The Maritime Signal, February 2023 Shock & 4-Way Decomposition
- * Beat 2 (35s): Act II — Conventional OM Models (SMA, WMA, ETS α=0.50 Baseline)
- * Beat 3 (30s): Act III — Integrity Partition & Blind Validation (30 Dev vs 6 Val)
- * Beat 4 (40s): Act IV — Advanced Algorithmic Arena (ARIMA 1,1,0, Lagged LR, Random Forest)
- * Beat 5 (55s): Act V — Model Tournament Leaderboard & Decisive Victory (ARIMA #1)
- * Beat 6 (45s): Act VI — Port Operations & Strategic Recommendations
+ * IE-PC 3112: Operations Management 1 · BSIE 3-E · Cebu Technological University
+ * Dataset D10: Port of Los Angeles Monthly Exports (36 Observations: Jan 2022 – Dec 2024)
+ *
+ * Presentation Flow Structure (Exact Script & Timeframe):
+ * Beat 0 (13s): The Hook — Title & Study Context (0:00 - 0:13) · All Speakers
+ * Beat 1 (28s): The Problem — Operational Problem & Data Behavior (0:13 - 0:41) · Elaiza Jane Aligato
+ * Beat 2 (44s): The First Contender — 4 Conventional Models Grid & Overlap (0:41 - 1:25) · Rash Mae Crystelle C. Ansay
+ * Beat 3 (16s): The Fair Test — Pre-Validation Baseline Selection: ETS α = 0.50 (1:26 - 1:41) · Rash Mae Crystelle C. Ansay
+ * Beat 4 (41s): The Challengers — Actual vs Statistical & ML Forecast + "Which One Wins?" (1:42 - 2:22) · Mylene Joy Villagracia
+ * Beat 5 (8s):  The Twist — Validation Ranking Across All Models & ARIMA Decisive Performance (2:23 - 2:30) · Mylene Joy Villagracia
+ * Beat 6 (60s): The Decision — USE ARIMA (1,1,0), Capacity Commitment, Final Verdict & Closing (2:31 - 3:30) · Rash Mae Crystelle C. Ansay & Team
  */
 
 import { BaselineModelChoice } from './forecastingData';
@@ -42,62 +42,62 @@ export interface KeynoteBeat {
 
 export const KEYNOTE_BEATS: KeynoteBeat[] = [
   // =========================================================================
-  // BEAT 0 (0:00 - 0:25 · 25s) — PROLOGUE: MEET GROUP 7
+  // BEAT 0 (0:00 - 0:13 · 13s) — THE HOOK: TITLE AND STUDY CONTEXT
   // =========================================================================
   {
     id: "beat-0",
     beatNumber: 0,
     slideNumber: 1,
-    title: "Prologue: Meet Group 7",
-    beatTitle: "Prologue: Meet Group 7 · Section D10",
-    actTitle: "Prologue: Applied Study 1",
-    flowSection: "Group 7 Specialists & Port Introduction",
-    durationSeconds: 25,
+    title: "Title & Study Context",
+    beatTitle: "Beat 0: The Hook · Title and Study Context",
+    actTitle: "Beat 0: The Hook",
+    flowSection: "Dataset D10: Port of Los Angeles Monthly Exports · The Explainer",
+    durationSeconds: 13,
     cumulativeStartSeconds: 0,
-    speaker: "Aligato, Ansay, Villagracia",
-    speakerRole: "Industrial Engineering Analytics Team",
-    speakerInitials: "G7",
-    livePresenterPrompt: "Welcome to Group 7's Real-Data Forecasting Decision Presentation for Operations Management 1. We are Industrial Engineering students of BSIE 3-E, Section D10, at Cebu Technological University. In this study, we tackle thirty-six consecutive months of containerized export volumes from the Port of Los Angeles to determine the optimal forecasting model for port terminal decision-making.",
-    liveSpeakerPrompt: "Welcome to Group 7's Real-Data Forecasting Decision Presentation for Operations Management 1. We are Industrial Engineering students of BSIE 3-E, Section D10, at Cebu Technological University. In this study, we tackle thirty-six consecutive months of containerized export volumes from the Port of Los Angeles to determine the optimal forecasting model for port terminal decision-making.",
+    speaker: "All Speakers",
+    speakerRole: "Industrial Engineering Analytics Team · BSIE 3-E",
+    speakerInitials: "ALL",
+    livePresenterPrompt: "ELAIZA: Every month, a major port faces the same challenge. How many containers should it prepare to handle?\n\nRASH MAE: Too much capacity means wasted labor and equipment. Too little means delays, congestion, and missed opportunities.\n\nMYLENE: So, we analyzed export data from the Port of Los Angeles to find: Which forecasting model gives management the most reliable guide?",
+    liveSpeakerPrompt: "ELAIZA: Every month, a major port faces the same challenge. How many containers should it prepare to handle?\n\nRASH MAE: Too much capacity means wasted labor and equipment. Too little means delays, congestion, and missed opportunities.\n\nMYLENE: So, we analyzed export data from the Port of Los Angeles to find: Which forecasting model gives management the most reliable guide?",
     onScreenStoryCaptions: [
-      "GROUP 7 (D10)",
-      "BSIE 3-E · CTU MAIN",
+      "THE EXPLAINER",
       "PORT OF LOS ANGELES",
-      "36 MONTHS DATASET"
+      "DATASET D10",
+      "WHICH FORECASTING MODEL WINS?"
     ],
-    dataHighlight: "Physical Container → Data Particles → 36 Months Timeline",
+    dataHighlight: "Dataset D10 · Port of Los Angeles Monthly Exports",
     keyMetric: {
       label: "Dataset D10",
-      value: "36 MONTHS",
-      sublabel: "Jan 2022 – Dec 2024 Verified Export TEUs"
+      value: "PORT OF LA",
+      sublabel: "Monthly Container Export Volume (TEUs)"
     }
   },
 
   // =========================================================================
-  // BEAT 1 (0:25 - 1:05 · 40s) — ACT I: THE MARITIME SIGNAL & DATA BEHAVIOR
+  // BEAT 1 (0:13 - 0:41 · 28s) — THE PROBLEM: OPERATIONAL PROBLEM & DATA BEHAVIOR
   // =========================================================================
   {
     id: "beat-1",
     beatNumber: 1,
     slideNumber: 2,
-    title: "The Maritime Signal & Data Behavior",
-    beatTitle: "Act I: Maritime Trade & February 2023 Shock",
-    actTitle: "Act I: Physical Port to Data Space",
-    flowSection: "Chronological Data Points, Feb 2023 Shock & 4-Way Decomposition",
-    durationSeconds: 40,
-    cumulativeStartSeconds: 25,
+    title: "Operational Problem & Data Behavior",
+    beatTitle: "Beat 1: The Problem · Operational Problem & Data Behavior",
+    actTitle: "Beat 1: The Problem",
+    flowSection: "Data Shock, Question: How can you plan effectively if you cannot predict what comes next? & 4 Components (0:35 - 0:40)",
+    durationSeconds: 28,
+    cumulativeStartSeconds: 13,
     speaker: "Aligato, Elaiza Jane",
-    speakerRole: "Lead Analyst · Speaker 1",
+    speakerRole: "Speaker 1",
     speakerInitials: "EA",
-    livePresenterPrompt: "Our operational dataset spans thirty-six monthly export observations from January 2022 to December 2024. In early 2022, volumes were robust before entering a prolonged destocking decline. In February 2023, volume hit the series nadir of 236,264 TEUs — a thirty-two percent plunge. We decompose the series into Trend, Seasonality, Cyclicality, and Randomness. Linear correlation with time is downward at r = -0.39, proving that fitting a straight line on this volatile series is an operational hazard.",
-    liveSpeakerPrompt: "Our operational dataset spans thirty-six monthly export observations from January 2022 to December 2024. In early 2022, volumes were robust before entering a prolonged destocking decline. In February 2023, volume hit the series nadir of 236,264 TEUs — a thirty-two percent plunge. We decompose the series into Trend, Seasonality, Cyclicality, and Randomness. Linear correlation with time is downward at r = -0.39, proving that fitting a straight line on this volatile series is an operational hazard.",
+    livePresenterPrompt: "ELAIZA: At first, we might expect export volumes to follow a clear pattern. But our data tells a different story. In May 2022, exports reached 466,221 TEUs. By November, they had fallen to 327,888. Then came February 2023. Exports dropped to only 236,264 TEUs, our lowest observation. We kept this unusual value because removing real observations would hide part of the operational problem. Our development data also showed a weak negative trend, with a correlation of negative 0.39. No clear seasonal pattern emerged. How can you plan effectively if you cannot predict what comes next?",
+    liveSpeakerPrompt: "ELAIZA: At first, we might expect export volumes to follow a clear pattern. But our data tells a different story. In May 2022, exports reached 466,221 TEUs. By November, they had fallen to 327,888. Then came February 2023. Exports dropped to only 236,264 TEUs, our lowest observation. We kept this unusual value because removing real observations would hide part of the operational problem. Our development data also showed a weak negative trend, with a correlation of negative 0.39. No clear seasonal pattern emerged. How can you plan effectively if you cannot predict what comes next?",
     onScreenStoryCaptions: [
-      "36 MONTHS TIMELINE",
-      "FEB 2023 LOW: 236,264",
-      "4-WAY DECOMPOSITION",
-      "r = −0.39 (DOWNWARD)"
+      "MAY 2022: 466,221 TEUs",
+      "NOV 2022: 327,888 TEUs",
+      "FEB 2023 LOW: 236,264 TEUs",
+      "HOW CAN YOU PLAN EFFECTIVELY IF YOU CANNOT PREDICT WHAT COMES NEXT?"
     ],
-    dataHighlight: "36 Months Verified TEUs · Historical Shock: 236,264 TEUs",
+    dataHighlight: "Core Operational Challenge: Demand Volatility & Shock",
     keyMetric: {
       label: "Series Low",
       value: "236,264 TEUs",
@@ -106,167 +106,167 @@ export const KEYNOTE_BEATS: KeynoteBeat[] = [
   },
 
   // =========================================================================
-  // BEAT 2 (1:05 - 1:40 · 35s) — ACT II: CONVENTIONAL OM MODELS
+  // BEAT 2 (0:41 - 1:25 · 44s) — THE FIRST CONTENDER: 4 CONVENTIONAL MODELS
   // =========================================================================
   {
     id: "beat-2",
     beatNumber: 2,
     slideNumber: 3,
-    title: "Conventional OM Models",
-    beatTitle: "Act II: Conventional OM Laboratory",
-    actTitle: "Act II: Conventional OM Lab",
-    flowSection: "SMA, WMA, ETS (α=0.20, 0.50, 0.80), & Trend Projection",
-    durationSeconds: 35,
-    cumulativeStartSeconds: 65,
+    title: "Conventional Forecasting Results",
+    beatTitle: "Beat 2: The First Contender · 4 Conventional Models Grid & Overlap",
+    actTitle: "Beat 2: The First Contender",
+    flowSection: "4 Conventional Models Grid (SMA, WMA, ETS α=0.50, SLR) & Overlapped View (0:41 - 1:25)",
+    durationSeconds: 44,
+    cumulativeStartSeconds: 41,
     speaker: "Ansay, Rash Mae Crystelle C.",
-    speakerRole: "Group Leader · Port Logistics Planner · Speaker 2",
+    speakerRole: "Speaker 2",
     speakerInitials: "RA",
-    livePresenterPrompt: "In our Operations Management laboratory, we evaluated four classical techniques across the development horizon: Simple Moving Average, Weighted Moving Average, Exponential Smoothing with multiple alphas, and Trend Projection. Moving averages exhibited notable lag following the February 2023 shock. Exponential Smoothing at alpha 0.50 struck the ideal balance between memory and recency, achieving the lowest training error and becoming our locked conventional baseline.",
-    liveSpeakerPrompt: "In our Operations Management laboratory, we evaluated four classical techniques across the development horizon: Simple Moving Average, Weighted Moving Average, Exponential Smoothing with multiple alphas, and Trend Projection. Moving averages exhibited notable lag following the February 2023 shock. Exponential Smoothing at alpha 0.50 struck the ideal balance between memory and recency, achieving the lowest training error and becoming our locked conventional baseline.",
+    livePresenterPrompt: "RASH MAE: Before turning to advanced models, we tested four conventional methods using the first 30 months. We compared the three-month Simple Moving Average, Weighted Moving Average, Exponential Smoothing, and Trend Projection. For Exponential Smoothing, we tested three alpha values: 0.20, 0.50, and 0.80. The strongest development result came from alpha 0.50, with an MAE of 30,596 TEUs. So, we selected ETS alpha 0.50 as our conventional baseline. But here's the next question. Would this model remain the strongest when faced with data it had never seen?",
+    liveSpeakerPrompt: "RASH MAE: Before turning to advanced models, we tested four conventional methods using the first 30 months. We compared the three-month Simple Moving Average, Weighted Moving Average, Exponential Smoothing, and Trend Projection. For Exponential Smoothing, we tested three alpha values: 0.20, 0.50, and 0.80. The strongest development result came from alpha 0.50, with an MAE of 30,596 TEUs. So, we selected ETS alpha 0.50 as our conventional baseline. But here's the next question. Would this model remain the strongest when faced with data it had never seen?",
     onScreenStoryCaptions: [
-      "3-PERIOD SMA LAG",
-      "3-PERIOD WMA (0.50/0.30/0.20)",
-      "ETS α = 0.50 (BASELINE ★)",
-      "DEV MAE: 30,596 TEUs"
+      "4 CONVENTIONAL MODELS IN ONE FRAME",
+      "SMA (33,428 MAE) · WMA (32,142 MAE)",
+      "ETS α = 0.50 (30,596 MAE BASELINE)",
+      "OVERLAPPED CONVENTIONAL COMPARISON"
     ],
-    dataHighlight: "Center-Stage Zooms · ETS α=0.50 Locked Baseline · Trend r = -0.39",
+    dataHighlight: "4 Conventional Models Grid & Overlapped Comparison · ETS α=0.50 Baseline",
     keyMetric: {
       label: "Conventional Baseline",
       value: "ETS α = 0.50",
-      sublabel: "Dev MAE: 30,596 · r = -0.39 down-slope"
+      sublabel: "Dev MAE: 30,596 TEUs · Aligned with Actual Demand"
     }
   },
 
   // =========================================================================
-  // BEAT 3 (1:40 - 2:10 · 30s) — ACT III: INTEGRITY PARTITION & BLIND VALIDATION
+  // BEAT 3 (1:26 - 1:41 · 15s) — THE FAIR TEST: BASELINE MODEL SELECTION
   // =========================================================================
   {
     id: "beat-3",
     beatNumber: 3,
     slideNumber: 4,
-    title: "Integrity Partition & Blind Validation",
-    beatTitle: "Act III: Partition & Blind Validation",
-    actTitle: "Act III: Integrity Partition",
-    flowSection: "30 Development Months vs 6 Validation Months Holdout Horizon",
-    durationSeconds: 30,
-    cumulativeStartSeconds: 100,
+    title: "Pre-Validation Baseline Selection: ETS α = 0.50",
+    beatTitle: "Beat 3: The Fair Test · Baseline Model Selection",
+    actTitle: "Beat 3: The Fair Test",
+    flowSection: "Locked Baseline: ETS α = 0.50 · Blind Holdout Setup (1:26 - 1:41)",
+    durationSeconds: 16,
+    cumulativeStartSeconds: 85,
     speaker: "Ansay, Rash Mae Crystelle C.",
-    speakerRole: "Group Leader · Port Logistics Planner · Speaker 2",
+    speakerRole: "Speaker 2",
     speakerInitials: "RA",
-    livePresenterPrompt: "A core principle of industrial forecasting integrity is chronological partitioning. We separated the thirty-six months into thirty development periods — January 2022 to June 2024 — and reserved the final six months — July to December 2024 — as a strict, out-of-sample validation holdout. Models were parameterized strictly on development data and evaluated on genuinely unseen future actuals.",
-    liveSpeakerPrompt: "A core principle of industrial forecasting integrity is chronological partitioning. We separated the thirty-six months into thirty development periods — January 2022 to June 2024 — and reserved the final six months — July to December 2024 — as a strict, out-of-sample validation holdout. Models were parameterized strictly on development data and evaluated on genuinely unseen future actuals.",
+    livePresenterPrompt: "RASH MAE: Before testing the challengers, we locked our baseline: Exponential Smoothing with alpha 0.50. We evaluated performance across rigorous metrics and reserved Periods 31 to 36 for validation, keeping those six months separate from model development. This gave us a fair comparison. The baseline was already chosen before the validation results were revealed.",
+    liveSpeakerPrompt: "RASH MAE: Before testing the challengers, we locked our baseline: Exponential Smoothing with alpha 0.50. We evaluated performance across rigorous metrics and reserved Periods 31 to 36 for validation, keeping those six months separate from model development. This gave us a fair comparison. The baseline was already chosen before the validation results were revealed.",
     onScreenStoryCaptions: [
-      "30 DEV MONTHS (1–30)",
-      "6 VAL MONTHS (31–36)",
-      "CHRONOLOGICAL PARTITION",
-      "BLIND OUT-OF-SAMPLE TEST"
+      "THE BASELINE",
+      "ETS α = 0.50 LOCKED BASELINE",
+      "FAIR BLIND VALIDATION HOLDOUT",
+      "PERIODS 31–36 SEPARATED"
     ],
-    dataHighlight: "Chronological Split: Months 1–30 Development vs 31–36 Validation",
+    dataHighlight: "Locked Pre-Validation Baseline: ETS α = 0.50 (MAE: 30,596 TEUs)",
     keyMetric: {
-      label: "Validation Split",
-      value: "6 MONTHS",
-      sublabel: "Blind Out-of-Sample Holdout (Jul–Dec 2024)"
+      label: "Baseline Model",
+      value: "ETS α = 0.50",
+      sublabel: "Pre-Validation Baseline Locked"
     }
   },
 
   // =========================================================================
-  // BEAT 4 (2:10 - 2:50 · 40s) — ACT IV: ADVANCED ALGORITHMIC ARENA
+  // BEAT 4 (1:42 - 2:22 · 40s) — THE CHALLENGERS: ACTUAL VS STATISTICAL & ML FORECAST
   // =========================================================================
   {
     id: "beat-4",
     beatNumber: 4,
     slideNumber: 5,
-    title: "Advanced Algorithmic Arena",
-    beatTitle: "Act IV: Statistical & ML Challengers",
-    actTitle: "Act IV: Advanced Algorithmic Arena",
-    flowSection: "ARIMA (1,1,0), Lagged Linear Regression, Random Forest 100 Trees",
-    durationSeconds: 40,
-    cumulativeStartSeconds: 130,
+    title: "ARIMA and Machine-Learning Validation Results",
+    beatTitle: "Beat 4: The Challengers · Actual vs Statistical & ML Forecast + Which One Wins?",
+    actTitle: "Beat 4: The Challengers",
+    flowSection: "Actual vs Statistical & Machine Learning Forecast (Holdout 31–36) & 'Which One Wins?' (1:42 - 2:22)",
+    durationSeconds: 41,
+    cumulativeStartSeconds: 101,
     speaker: "Villagracia, Mylene Joy",
-    speakerRole: "Validation & ML Engineer · Speaker 3",
+    speakerRole: "Speaker 3",
     speakerInitials: "MV",
-    livePresenterPrompt: "Beyond conventional time-series models, we introduced three advanced methods: ARIMA (1,1,0), Lagged Linear Regression with autoregressive lags one to three, and a Random Forest ensemble of one hundred regression trees. First-differencing in ARIMA achieved stationarity and effectively absorbed post-shock recovery momentum, recording the lowest Akaike Information Criterion at 701.43.",
-    liveSpeakerPrompt: "Beyond conventional time-series models, we introduced three advanced methods: ARIMA (1,1,0), Lagged Linear Regression with autoregressive lags one to three, and a Random Forest ensemble of one hundred regression trees. First-differencing in ARIMA achieved stationarity and effectively absorbed post-shock recovery momentum, recording the lowest Akaike Information Criterion at 701.43.",
+    livePresenterPrompt: "MYLENE: Now, three challengers entered the test. First, ARIMA 1,1,0, selected through AIC comparison across six candidate orders. Second, Lagged Linear Regression, using the previous three months to predict the next. Third, Random Forest, combining 100 regression trees. Each model learned from the first 30 months. We then forecast the final six months one step at a time, adding each actual observation to the history without retraining. Three models. Six unseen months. One question: which one wins?",
+    liveSpeakerPrompt: "MYLENE: Now, three challengers entered the test. First, ARIMA 1,1,0, selected through AIC comparison across six candidate orders. Second, Lagged Linear Regression, using the previous three months to predict the next. Third, Random Forest, combining 100 regression trees. Each model learned from the first 30 months. We then forecast the final six months one step at a time, adding each actual observation to the history without retraining. Three models. Six unseen months. One question: which one wins?",
     onScreenStoryCaptions: [
-      "ARIMA (1,1,0) · AIC 701.43",
-      "LAGGED REGRESSION (LAGS 1–3)",
-      "RANDOM FOREST (100 TREES)",
-      "STATISTICS VS ML"
+      "ACTUAL VS STATISTICAL & ML FORECAST",
+      "ARIMA (1,1,0) · LAGGED LR · RANDOM FOREST",
+      "PERIODS 31–36 HOLDOUT EVALUATION",
+      "WHICH ONE WINS?"
     ],
-    dataHighlight: "3 Advanced Contenders Emerge: ARIMA (1,1,0), Lagged LR, Random Forest",
+    dataHighlight: "Actual vs Statistical & Machine Learning Forecast · Contenders Lineup",
     keyMetric: {
-      label: "Contenders",
-      value: "9 MODELS",
-      sublabel: "Conventional vs ARIMA vs Machine Learning"
+      label: "Challengers",
+      value: "3 MODELS",
+      sublabel: "ARIMA (1,1,0) · Lagged LR · Random Forest"
     }
   },
 
   // =========================================================================
-  // BEAT 5 (2:50 - 3:45 · 55s) — ACT V: LEADERBOARD & DECISIVE VICTORY
+  // BEAT 5 (2:23 - 2:30 · 8s) — THE TWIST: VALIDATION RANKING ACROSS ALL MODELS
   // =========================================================================
   {
     id: "beat-5",
     beatNumber: 5,
     slideNumber: 6,
-    title: "Leaderboard & Decisive Victory",
-    beatTitle: "Act V: Model Tournament & Decisive Victory",
-    actTitle: "Act V: Validation Leaderboard",
-    flowSection: "All 9 Models Ranked by Out-of-Sample MAE · ARIMA #1 Winner",
-    durationSeconds: 55,
-    cumulativeStartSeconds: 170,
+    title: "Validation Ranking Across All Models",
+    beatTitle: "Beat 5: The Twist · Validation Ranking Across All Models & ARIMA Performance",
+    actTitle: "Beat 5: The Twist",
+    flowSection: "Validation Ranking Across All Models · ARIMA (1,1,0) Decisive Performance (2:23 - 2:30)",
+    durationSeconds: 8,
+    cumulativeStartSeconds: 142,
     speaker: "Villagracia, Mylene Joy",
-    speakerRole: "Validation & ML Engineer · Speaker 3",
+    speakerRole: "Speaker 3",
     speakerInitials: "MV",
-    livePresenterPrompt: "Evaluating all nine models across the six-month blind validation holdout yielded an unmistakable winner. ARIMA (1,1,0) achieved first place with a Mean Absolute Error of 20,919 TEUs and a MAPE of 4.71%. It outperformed our locked conventional baseline, ETS alpha 0.50 at 27,725 TEUs, delivering a twenty-four point five percent error reduction. Complex Machine Learning fell behind conventional smoothing due to sample size constraints, proving that parsimony and proper differencing win.",
-    liveSpeakerPrompt: "Evaluating all nine models across the six-month blind validation holdout yielded an unmistakable winner. ARIMA (1,1,0) achieved first place with a Mean Absolute Error of 20,919 TEUs and a MAPE of 4.71%. It outperformed our locked conventional baseline, ETS alpha 0.50 at 27,725 TEUs, delivering a twenty-four point five percent error reduction. Complex Machine Learning fell behind conventional smoothing due to sample size constraints, proving that parsimony and proper differencing win.",
+    livePresenterPrompt: "MYLENE: Here's where the results took a turn. Average exports rose from 377,268 TEUs during development to 445,111 during validation. That's an 18 percent increase. Random Forest recorded an MAE of 37,138 TEUs. Lagged Linear Regression reached 37,990. But ARIMA took first place among our tested models, with an MAE of 20,919 and a MAPE of 4.71 percent, reducing average error by 24.5 percent compared with our locked baseline.",
+    liveSpeakerPrompt: "MYLENE: Here's where the results took a turn. Average exports rose from 377,268 TEUs during development to 445,111 during validation. That's an 18 percent increase. Random Forest recorded an MAE of 37,138 TEUs. Lagged Linear Regression reached 37,990. But ARIMA took first place among our tested models, with an MAE of 20,919 and a MAPE of 4.71 percent, reducing average error by 24.5 percent compared with our locked baseline.",
     onScreenStoryCaptions: [
-      "ARIMA #1: 20,919 MAE",
-      "MAPE: 4.71%",
-      "ETS α=0.50: 27,725",
-      "24.5% ERROR REDUCTION"
+      "VALIDATION RANKING ACROSS ALL MODELS",
+      "ARIMA (1,1,0) DECISIVE PERFORMANCE",
+      "20,919 MAE · 4.71% MAPE (#1 RANK)",
+      "−24.5% ERROR vs LOCKED BASELINE"
     ],
-    dataHighlight: "Official Validation MAE Ranking: ARIMA #1 (20,919 TEUs)",
+    dataHighlight: "Validation Ranking Across All Models: ARIMA (1,1,0) #1 (20,919 MAE)",
     keyMetric: {
       label: "Top Rank",
       value: "ARIMA #1",
-      sublabel: "Outperforms all 8 alternative models"
+      sublabel: "20,919 MAE · 4.71% MAPE"
     }
   },
 
   // =========================================================================
-  // BEAT 6 (3:45 - 4:30 · 45s) — ACT VI: PORT OPERATIONS & STRATEGIC RECOMMENDATIONS
+  // BEAT 6 (2:31 - 3:30 · 60s) — THE DECISION: OPERATIONS RECOMMENDATION & OVERSIGHT
   // =========================================================================
   {
     id: "beat-6",
     beatNumber: 6,
     slideNumber: 7,
-    title: "Port Operations & Recommendations",
-    beatTitle: "Act VI: Port Operations & Strategic Recommendations",
-    actTitle: "Act VI: Operations & Port Decision",
-    flowSection: "Labor Gangs, Equipment Staging, Berth Capacity, & Modest Capacity Buffer",
-    durationSeconds: 45,
-    cumulativeStartSeconds: 225,
-    speaker: "Ansay, Rash Mae Crystelle C.",
-    speakerRole: "Group Leader · Port Logistics Planner · Speaker 2",
-    speakerInitials: "RA",
-    livePresenterPrompt: "Translating statistical output into port terminal operations: our monthly forecast directly governs three operational pillars: longshore gang scheduling, yard crane equipment staging, and container berth allocation. Because underforecasting causes severe asymmetric demurrage penalties exceeding fifty thousand dollars daily, we mandate a modest five to eight percent capacity buffer above the ARIMA forecast, paired with continuous human industrial engineering oversight.",
-    liveSpeakerPrompt: "Translating statistical output into port terminal operations: our monthly forecast directly governs three operational pillars: longshore gang scheduling, yard crane equipment staging, and container berth allocation. Because underforecasting causes severe asymmetric demurrage penalties exceeding fifty thousand dollars daily, we mandate a modest five to eight percent capacity buffer above the ARIMA forecast, paired with continuous human industrial engineering oversight.",
+    title: "Operations Recommendation, Capacity Buffer & Final Verdict",
+    beatTitle: "Beat 6: The Decision · USE ARIMA (1,1,0), Capacity Commitment, Final Verdict & Closing",
+    actTitle: "Beat 6: The Decision",
+    flowSection: "USE ARIMA (1,1,0) Primary, +5% Capacity Buffer, Human Final Verdict & Closing (2:31 - 3:30)",
+    durationSeconds: 60,
+    cumulativeStartSeconds: 150,
+    speaker: "Rash Mae Crystelle C. Ansay & Team",
+    speakerRole: "Speaker 2 & Team",
+    speakerInitials: "TEAM",
+    livePresenterPrompt: "RASH MAE: So, what should port management do with these findings? Use ARIMA 1,1,0 as the primary one-month-ahead forecast, updated monthly. Keep ETS alpha 0.50 as a spreadsheet backup. Plan labor, berth allocation, and equipment around the forecast. Arrange about five percent flexible capacity above the forecast. Review model performance quarterly. Most importantly, a human planner must approve every major capacity commitment.\n\nELAIZA: Because real demand never follows a perfect script.\n\nMYLENE: And even the best model has limits.\n\nRASH MAE: Our verdict: ARIMA leads our comparison, but sound operational decisions still require human judgment.\n\nALL: This is BSIE 3-E from Cebu Technological University. Thank you for watching The Explainer.",
+    liveSpeakerPrompt: "RASH MAE: So, what should port management do with these findings? Use ARIMA 1,1,0 as the primary one-month-ahead forecast, updated monthly. Keep ETS alpha 0.50 as a spreadsheet backup. Plan labor, berth allocation, and equipment around the forecast. Arrange about five percent flexible capacity above the forecast. Review model performance quarterly. Most importantly, a human planner must approve every major capacity commitment.\n\nELAIZA: Because real demand never follows a perfect script.\n\nMYLENE: And even the best model has limits.\n\nRASH MAE: Our verdict: ARIMA leads our comparison, but sound operational decisions still require human judgment.\n\nALL: This is BSIE 3-E from Cebu Technological University. Thank you for watching The Explainer.",
     onScreenStoryCaptions: [
-      "LABOR · EQUIPMENT · BERTH",
-      "DEMURRAGE COST > $50K/DAY",
-      "+5–8% CAPACITY BUFFER",
-      "HUMAN IE OVERSIGHT"
+      "USE ARIMA (1, 1, 0) MONTHLY ROLL",
+      "+5% FLEXIBLE CAPACITY BUFFER",
+      "HUMAN PLANNER APPROVAL MANDATORY",
+      "SOUND DECISIONS REQUIRE HUMAN JUDGMENT"
     ],
-    dataHighlight: "ARIMA (1,1,0) Primary · ETS α=0.50 Backup · Capacity Buffer",
+    dataHighlight: "USE ARIMA (1,1,0) Primary · +5% Buffer · Human Final Verdict",
     keyMetric: {
       label: "Final Verdict",
       value: "ARIMA (1,1,0)",
-      sublabel: "Forecast Volume · Plan Capacity · Human Oversight"
+      sublabel: "+5% Flexible Buffer · Human Judgment"
     }
   }
 ];
 
-export const TOTAL_KEYNOTE_SECONDS = KEYNOTE_BEATS.reduce((sum, b) => sum + b.durationSeconds, 0); // Exactly 270s (4:30 minutes)
+export const TOTAL_KEYNOTE_SECONDS = KEYNOTE_BEATS.reduce((sum, b) => sum + b.durationSeconds, 0); // Exactly 210s (03:30 minutes)
 
 // Compatibility exports
 export type SlideBeat = KeynoteBeat;

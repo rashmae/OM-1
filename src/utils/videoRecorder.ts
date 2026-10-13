@@ -274,7 +274,7 @@ export class KeynoteVideoRecorder {
       ctx.fillText('r = −0.39', w - 260, 140);
       ctx.fillStyle = '#CBD5E1';
       ctx.font = '11px system-ui, sans-serif';
-      ctx.fillText('Down Slope −2,216 TEUs/mo', w - 260, 165);
+      ctx.fillText('Downward Linear Drift', w - 260, 165);
 
     } else if (beatIndex === 1) {
       // SLIDE 2: Four Conventional Approaches

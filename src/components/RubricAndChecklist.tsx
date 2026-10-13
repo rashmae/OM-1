@@ -92,7 +92,7 @@ export const RubricAndChecklist: React.FC = () => {
             <span>CRITICAL GOOGLE CLASSROOM SUBMISSION PROTOCOL · GROUP 7</span>
           </div>
           <h2 className="text-xl font-bold text-white">
-            Pre-Presentation Submission Rules · Group Leader Action
+            Pre-Presentation Submission Rules · Team Submission Action
           </h2>
           <p className="text-xs md:text-sm text-slate-200 max-w-3xl leading-relaxed">
             All groups must submit their complete requirements in Google Classroom <strong>BEFORE</strong> the presentation starts on <strong>October 8, 2026 (9:00 AM)</strong>.
@@ -100,7 +100,7 @@ export const RubricAndChecklist: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-xs text-slate-300">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>Only <strong>Rash Mae Crystelle C. Ansay (Group Leader)</strong> will upload files and click "Turn In".</span>
+              <span>Only <strong>Rash Mae Crystelle C. Ansay</strong> will upload files and click "Turn In".</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />

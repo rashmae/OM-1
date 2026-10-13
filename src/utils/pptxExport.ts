@@ -56,23 +56,23 @@ export async function generateNativePPTX(): Promise<void> {
     const members = [
       {
         name: 'Aligato, Elaiza Jane',
-        role: 'Lead Analyst & Time-Series Specialist',
+        role: 'Speaker 1',
         motto: '“Sees the Signal & Seasonality”',
         badges: 'ARIMA (1,1,0) · ETS α=0.50 · Trend Decomposition',
-        tag: 'SPECIALIST 1 OF 3',
+        tag: 'SPEAKER 1',
         color: SKY
       },
       {
         name: 'Ansay, Rash Mae Crystelle C.',
-        role: 'Port Operations & Logistics Planner',
+        role: 'Speaker 2',
         motto: '“Sees the Operational Capacity”',
         badges: 'Berth Scheduling · Yard Staging · TEU Throughput',
-        tag: 'GROUP LEADER · SPECIALIST 2',
+        tag: 'SPEAKER 2',
         color: AMBER
       },
       {
         name: 'Villagracia, Mylene Joy',
-        role: 'Validation & ML Engineer',
+        role: 'Speaker 3',
         motto: '“Sees the Predictive Accuracy”',
         badges: 'MAE / RMSE · Random Forest · Lagged Regression',
         tag: 'SPECIALIST 3 OF 3',
@@ -192,7 +192,7 @@ export async function generateNativePPTX(): Promise<void> {
       fontSize: 36, fontFace: 'Helvetica', color: AMBER, bold: true
     });
 
-    s1.addText('Correlation between volume and time slopes downward (r = −0.39, −2,216 TEUs/month). It describes the 2022 decline and nothing that came after; projecting a straight line on this volatile series is an operational hazard.', {
+    s1.addText('Correlation between volume and time slopes downward (r = −0.39). It describes the 2022 decline and nothing that came after; projecting a straight line on this volatile series is an operational hazard.', {
       x: 6.3, y: 3.7, w: 4.2, h: 1.3,
       fontSize: 12, fontFace: 'Helvetica', color: LIGHT_SLATE, lineSpacingMultiple: 1.2
     });
@@ -234,7 +234,7 @@ export async function generateNativePPTX(): Promise<void> {
       { name: '3-Period SMA', formula: 'Avg(t-1, t-2, t-3)', mae: '33,428', mape: '9.71%', tag: 'Simple Baseline', color: SKY },
       { name: '3-Period WMA', formula: 'Weights: 0.50, 0.30, 0.20', mae: '32,142', mape: '9.31%', tag: 'Weighted Buffer', color: SKY },
       { name: 'Exp. Smoothing', formula: 'Alpha = 0.50', mae: '30,596', mape: '8.80%', tag: 'Lowest Dev Error ★', color: AMBER },
-      { name: 'Trend Projection', formula: 'y = 411,621 - 2,216*t', mae: '35,201', mape: '10.12%', tag: 'Eliminated (r = -0.39)', color: ROSE },
+      { name: 'Trend Projection', formula: 'Linear Regression (t)', mae: '35,201', mape: '10.12%', tag: 'Eliminated (r = -0.39)', color: ROSE },
     ];
 
     cards.forEach((c, idx) => {
@@ -455,7 +455,7 @@ export async function generateNativePPTX(): Promise<void> {
       fontSize: 10, fontFace: 'Helvetica', color: SLATE
     });
 
-    s4.addNotes(`[SLIDE 4 NOTES - 40s - Speaker: ${KEYNOTE_BEATS[4].speaker}]\n${KEYNOTE_BEATS[4].livePresenterPrompt}`);
+    s4.addNotes(`[SLIDE 4 NOTES - 32s - Speaker: ${KEYNOTE_BEATS[4].speaker}]\n${KEYNOTE_BEATS[4].livePresenterPrompt}`);
   }
 
   // =========================================================================

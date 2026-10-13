@@ -57,19 +57,19 @@ export const Header: React.FC<HeaderProps> = ({
                   <img 
                     src={MASCOT_BLUE} 
                     alt="Elaiza Jane Aligato" 
-                    title="Elaiza Jane Aligato · Lead Analyst & Time-Series Specialist" 
+                    title="Elaiza Jane Aligato · Speaker 1" 
                     className="w-5 h-5 rounded-full border border-sky-400 object-cover bg-slate-900" 
                   />
                   <img 
                     src={MASCOT_ORANGE} 
                     alt="Rash Mae Crystelle Ansay" 
-                    title="Rash Mae Crystelle Ansay (Leader) · Port Operations Planner" 
+                    title="Rash Mae Crystelle C. Ansay · Speaker 2" 
                     className="w-5 h-5 rounded-full border border-amber-400 object-cover bg-slate-900" 
                   />
                   <img 
                     src={MASCOT_GREEN} 
                     alt="Mylene Joy Villagracia" 
-                    title="Mylene Joy Villagracia · ML Validation Engineer" 
+                    title="Mylene Joy Villagracia · Speaker 3" 
                     className="w-5 h-5 rounded-full border border-emerald-400 object-cover bg-slate-900" 
                   />
                 </div>

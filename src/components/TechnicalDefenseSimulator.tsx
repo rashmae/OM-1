@@ -3,7 +3,7 @@ import {
   Shield, HelpCircle, CheckCircle, ChevronRight, UserCheck, Shuffle, 
   BookOpen, Calculator, AlertOctagon, Sparkles, Terminal, FileCode, Award, Ship 
 } from 'lucide-react';
-import { TECHNICAL_DEFENSE_QUESTIONS, DefenseQuestion } from '../data/technicalDefenseQnA';
+import { TECHNICAL_DEFENSE_QUESTIONS, DefenseQuestion, SCORED_DEFENSE_RUBRIC } from '../data/technicalDefenseQnA';
 import { TEAM_MEMBERS, BaselineModelChoice, BASELINE_MODELS } from '../data/forecastingData';
 
 interface TechnicalDefenseSimulatorProps {
@@ -11,9 +11,10 @@ interface TechnicalDefenseSimulatorProps {
 }
 
 export const TechnicalDefenseSimulator: React.FC<TechnicalDefenseSimulatorProps> = ({
-  selectedBaseline = 'wma3'
+  selectedBaseline = 'es05'
 }) => {
-  const activeModelConfig = BASELINE_MODELS[selectedBaseline] || BASELINE_MODELS.wma3;
+  const activeModelConfig = BASELINE_MODELS[selectedBaseline] || BASELINE_MODELS.es05;
+  const [activeView, setActiveView] = useState<'qna' | 'rubric'>('qna');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeQuestion, setActiveQuestion] = useState<DefenseQuestion>(TECHNICAL_DEFENSE_QUESTIONS[0]);
   const [isAnswerRevealed, setIsAnswerRevealed] = useState<boolean>(true);
@@ -92,27 +93,120 @@ export const TechnicalDefenseSimulator: React.FC<TechnicalDefenseSimulatorProps>
         </div>
       )}
 
-      {/* Category Pills Filter */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
-        {categories.map(cat => (
-          <button
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
-              selectedCategory === cat
-                ? 'bg-[#1B6CA8] text-white font-bold shadow-sm'
-                : 'bg-slate-900/80 text-slate-300 hover:text-white border border-slate-800'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+      {/* View Switcher: Q&A Console vs Scored Rubric */}
+      <div className="flex items-center gap-3 border-b border-slate-800 pb-3">
+        <button
+          onClick={() => setActiveView('qna')}
+          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+            activeView === 'qna'
+              ? 'bg-[#1B6CA8] text-white shadow-lg shadow-[#1B6CA8]/30 ring-1 ring-sky-400'
+              : 'bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800'
+          }`}
+        >
+          <HelpCircle className="w-4 h-4 text-sky-300" />
+          <span>Technical Q&A Console (10 Topics)</span>
+        </button>
+
+        <button
+          onClick={() => setActiveView('rubric')}
+          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+            activeView === 'rubric'
+              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black shadow-lg shadow-amber-500/20 ring-1 ring-amber-300'
+              : 'bg-slate-900/80 text-amber-300 hover:text-white border border-slate-800'
+          }`}
+        >
+          <Award className="w-4 h-4" />
+          <span>Scored Rubric (3 Pillars · 100 Pts)</span>
+        </button>
       </div>
 
-      {/* Two Column Layout: Questions List + Active Flashcard */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Column: Question Directory */}
-        <div className="lg:col-span-5 flex flex-col gap-2.5 max-h-[620px] overflow-y-auto pr-1">
+      {activeView === 'rubric' ? (
+        /* Scored Rubric 3-Pillar Interactive Display */
+        <div className="flex flex-col gap-6 animate-fadeIn">
+          {/* Rubric Header Summary */}
+          <div className="p-5 rounded-2xl bg-gradient-to-r from-[#0B2545] to-slate-950 border border-amber-500/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <div className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold flex items-center gap-1.5">
+                <Award className="w-4 h-4" />
+                <span>OFFICIAL EVALUATION RUBRIC · OPERATIONS MANAGEMENT 1</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mt-1">
+                Forecasting Defense Assessment · 100/100 Evaluation
+              </h3>
+              <p className="text-xs text-slate-300 mt-1 max-w-2xl">
+                Scored against three core pillars: Mathematical Rigor (35%), Validation Integrity (35%), and Practical Decision-Making (30%). All model answers strictly reference Dataset D10 verified metrics.
+              </p>
+            </div>
+            <div className="px-5 py-3 rounded-xl bg-amber-500/15 border border-amber-400/50 text-center">
+              <div className="text-[10px] font-mono uppercase text-amber-300 font-bold">Total Grade</div>
+              <div className="text-3xl font-extralight text-white font-mono">100 <span className="text-sm text-slate-400">/ 100</span></div>
+            </div>
+          </div>
+
+          {/* 3 Pillars Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {SCORED_DEFENSE_RUBRIC.map((pillar, pIdx) => (
+              <div
+                key={pIdx}
+                className="p-5 rounded-2xl bg-[#0B2545]/80 border border-slate-800 hover:border-[#1B6CA8]/60 transition-all flex flex-col justify-between gap-4 shadow-lg"
+              >
+                <div>
+                  <div className="flex items-center justify-between border-b border-slate-800 pb-2.5 mb-3">
+                    <h4 className="text-base font-bold text-white flex items-center gap-2">
+                      <CheckCircle className="w-4 h-4 text-emerald-400" />
+                      <span>{pillar.title}</span>
+                    </h4>
+                    <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-mono font-bold">
+                      {pillar.score} / {pillar.weight} pts
+                    </span>
+                  </div>
+
+                  <div className="space-y-3">
+                    {pillar.coreCriteria.map((crit, cIdx) => (
+                      <div key={cIdx} className="p-3 rounded-xl bg-slate-950/60 border border-slate-900 flex flex-col gap-1">
+                        <div className="flex items-center justify-between text-xs font-semibold text-sky-200">
+                          <span>{crit.name}</span>
+                          <span className="text-[10px] font-mono text-emerald-400">+{crit.pts} pts</span>
+                        </div>
+                        <p className="text-[11px] text-slate-400 leading-relaxed">
+                          {crit.description}
+                        </p>
+                        <div className="mt-1 pt-1 border-t border-slate-900/80 font-mono text-[10px] text-amber-300 flex items-center justify-between">
+                          <span>Verified:</span>
+                          <span className="text-slate-200">{crit.verifiedFigure}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        /* Q&A Console View */
+        <>
+          {/* Category Pills Filter */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+                  selectedCategory === cat
+                    ? 'bg-[#1B6CA8] text-white font-bold shadow-sm'
+                    : 'bg-slate-900/80 text-slate-300 hover:text-white border border-slate-800'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Two Column Layout: Questions List + Active Flashcard */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Left Column: Question Directory */}
+            <div className="lg:col-span-5 flex flex-col gap-2.5 max-h-[620px] overflow-y-auto pr-1">
           {filteredQuestions.map((q) => {
             const isSelected = activeQuestion.id === q.id;
             return (
@@ -270,6 +364,8 @@ export const TechnicalDefenseSimulator: React.FC<TechnicalDefenseSimulatorProps>
           </div>
         </div>
       </div>
-    </div>
+    </>
+  )}
+</div>
   );
 };

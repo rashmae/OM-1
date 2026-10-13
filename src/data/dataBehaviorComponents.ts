@@ -70,11 +70,11 @@ export const TIME_SERIES_COMPONENTS_META: Record<'trend' | 'seasonal' | 'cyclica
     id: 'trend',
     name: 'Trend Component',
     symbol: 'T',
-    mathFormula: 'T_t = a + b \\cdot t \\quad (r = -0.39 \\text{ in Dev, } b = -2,216 \\text{ TEUs/mo})',
+    mathFormula: 'T_t = a + b \\cdot t \\quad (r = -0.39 \\text{ in Dev})',
     color: '#38BDF8', // Cyan / Sky
     secondaryColor: '#0284C7',
     tagline: 'Secular Trend: Negative In-Sample Drift (r = -0.39)',
-    empiricalInsight: 'In development (Months 1–30), linear regression yields r = -0.39 with a downward slope of -2,216 TEUs/month driven by the 2022 freight contraction. Across all 36 months, secular trend flattens (r = 0.06), proving linear regression fails to track operational cargo swings.',
+    empiricalInsight: 'In development (Months 1–30), linear regression yields r = -0.39 with a downward slope driven by the 2022 freight contraction. Across all 36 months, secular trend flattens (r = 0.06), proving linear regression fails to track operational cargo swings.',
     varianceContributionPct: 3.8,
     operationalEffect: {
       category: 'CapEx & Infrastructure Planning',

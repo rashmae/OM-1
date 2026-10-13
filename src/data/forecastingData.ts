@@ -136,7 +136,7 @@ export const GROUP_INFO = {
   decisionContext: "Berth Scheduling, Yard Stacking Capacity, and Longshore Labor Gang Allocation",
   anomalyMonth: "February 2023 (236,264 TEUs, -32.0% unexpected drop, lowest point in dataset)",
   linearCorrelationR: -0.39, // Correlation r = -0.39 describes 2022 decline, nothing after
-  trendEquation: "y_t = 411,621 - 2,216 × t",
+  trendEquation: "y_t = a + b × t (Down Slope)",
   trendSlopeTEUs: -2216,
   devMeanTEUs: 377268,
   valMeanTEUs: 445111,
@@ -174,7 +174,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "Ansay, Rash Mae Crystelle C.",
-    role: "Group Leader / Speaker 2",
+    role: "Speaker 2",
     topic: "Act 2: The 4 Conventional Contenders, ETS (α=0.50) Baseline & ML Challengers",
     timeAllotment: "1:40 – 2:50 (70s)",
     initials: "RA"
@@ -479,7 +479,7 @@ export const VALIDATION_METRICS: ModelMetrics[] = [
     mape: 24.15,
     smape: 27.51,
     mpe: 24.15,
-    operationalAdvantage: "Fitted least-squares trend line on development months (slope -2,216 TEUs/month).",
+    operationalAdvantage: "Fitted least-squares trend line on development months (downward slope).",
     majorLimitation: "Negative slope (r = -0.39) extended 2022 decline into 2024, completely failing on the validation level shift.",
     complexity: "Low",
     validationRank: 9

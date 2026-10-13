@@ -1184,7 +1184,7 @@ export const DetailedDecompositionChart: React.FC<DetailedDecompositionChartProp
               Drifts from ~437,121 TEUs in Jan 2022 to ~460,304 TEUs in Dec 2024. However, simple linear regression yields correlation r = 0.06, proving linear models cannot capture operational cargo swings.
             </p>
           </div>
-          <div className="mt-2 text-[10px] font-mono text-sky-400">Equation: y_t = 411,621 - 2,216·t</div>
+          <div className="mt-2 text-[10px] font-mono text-sky-400">Equation: y_t = a + b·t (Linear Trend)</div>
         </div>
 
         {/* Seasonal Summary */}

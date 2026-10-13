@@ -45,10 +45,10 @@ export const TECHNICAL_DEFENSE_QUESTIONS: DefenseQuestion[] = [
       "Impact: Severely distorted linear regression trend slopes; penalized models with long memory.",
       "Why WMA handled it better: Because 0.50/0.30/0.20 weights shed the drop within 3 months, preventing prolonged forecast depression."
     ],
-    detailedDefenseScript: "In February 2023 (Month 14), exports dropped to 236,263.50 TEUs—a 32.0% drop from 347,493.25 TEUs that broke the prior trajectory. This was caused by nationwide inventory overhang where US retailers ceased overseas ordering, plus cargo diversion during heated ILWU-PMA contract talks. This structural shock penalized linear trend projection, which permanently tilted downward (slope = -2,216.33 TEUs/mo). 3-Period WMA excelled because its short 3-month window allowed it to recover once volumes normalized.",
+    detailedDefenseScript: "In February 2023 (Month 14), exports dropped to 236,263.50 TEUs—a 32.0% drop from 347,493.25 TEUs that broke the prior trajectory. This was caused by nationwide inventory overhang where US retailers ceased overseas ordering, plus cargo diversion during heated ILWU-PMA contract talks. This structural shock penalized linear trend projection, which permanently tilted downward. 3-Period WMA excelled because its short 3-month window allowed it to recover once volumes normalized.",
     keyFormulas: [
       "Percentage Shock = (A_14 - A_13) / A_13 = (236,263.50 - 347,493.25) / 347,493.25 = -32.01%",
-      "Linear Trend Slope = -2,216.33 TEUs/month"
+      "Linear Trend Downward Tilt (r = -0.39 in Development)"
     ],
     rubricCriterion: "Part III: Data Behavior & Time-Series Pattern Analysis (15 pts)"
   },
@@ -164,5 +164,155 @@ export const TECHNICAL_DEFENSE_QUESTIONS: DefenseQuestion[] = [
       "Operational Rule: If Exogenous Risk Index > Threshold, Activate Human Buffer Stock (+10% Berth Contingency)"
     ],
     rubricCriterion: "Part VIII & IX: Managerial Action & Human Oversight (20 pts)"
+  },
+  {
+    id: "q-9",
+    category: "Advanced ML",
+    question: "Why did ARIMA (1,1,0) win the tournament, and how did Lagged Linear Regression compare?",
+    targetedConcept: "Differencing Stationarity & Autoregressive Parsimony",
+    shortBulletSummary: [
+      "ARIMA (1,1,0) achieved lowest AIC (701.43) among six candidate orders evaluated.",
+      "First-differencing (d=1) removed non-stationary drift and stabilized variance after the Feb 2023 shock.",
+      "One autoregressive term (p=1, AR(1)) adapted rapidly to the 2024 level shift (+18% above development mean).",
+      "Won on every single metric: MAE 20,919 TEUs (24.5% cut vs baseline), MAPE 4.71%, RMSE 24,426 TEUs.",
+      "Lagged Regression failed: coefficients summed to only 0.63, pulling forecasts toward ~365k while actual was ~445k (MAE 37,990).",
+      "Honest caveat: 6-month naive repeat-last-month scored MAE 19,944, proving ARIMA's lead is real but modest."
+    ],
+    detailedDefenseScript: "ARIMA (1,1,0) succeeded because maritime port series exhibit non-stationary momentum. Taking first differences (d=1) transformed the series to stationarity, while the single autoregressive term (p=1) captured positive month-to-month persistence without overfitting. It recorded the lowest AIC of 701.43 among six evaluated orders and achieved first place on all six validation metrics: MAE 20,919 TEUs, MAPE 4.71%, RMSE 24,426 TEUs, and SMAPE 4.82%, cutting error by 24.5% versus our locked ETS α=0.50 baseline. Conversely, Lagged Linear Regression (trained on 27 rows) suffered because its autoregressive coefficients (0.487 + 0.132 + 0.007) sum to only 0.63, anchoring predictions toward ~365,000 TEUs during a +18% level shift. However, we remain mathematically humble: with only six validation months, a naive repeat-last-month scored MAE 19,944, proving ARIMA's edge is real but requires monthly recalibration.",
+    keyFormulas: [
+      "ARIMA(1,1,0): (1 - φ_1 B)(1 - B) Y_t = c + ε_t",
+      "AIC = 2k - 2 ln(L) = 701.43 (Lowest Candidate)",
+      "Lagged LR sum of coefficients: 0.487 + 0.132 + 0.007 = 0.626 < 1.0 (mean reversion bias)"
+    ],
+    rubricCriterion: "Part VI: Advanced Machine Learning & Parsimony (15 pts)"
+  },
+  {
+    id: "q-10",
+    category: "Human Oversight",
+    question: "Summarize your exact Operations Management recommendation: floor, buffer, cost logic, and review triggers.",
+    targetedConcept: "Capacity Commitment, Asymmetric Demurrage, and Industry 5.0",
+    shortBulletSummary: [
+      "Single statement recommendation: Use ARIMA (1,1,0) rolled forward monthly with ETS α=0.50 spreadsheet backup.",
+      "Floor plus buffer: Commit firm resources to ARIMA forecast; arrange ~5% flexible buffer (overtime, on-call labor).",
+      "Escalation route: Standby up to 10% (largest single under-forecast was 9.6% in July 2024).",
+      "Cost logic: Terminal capacity constraints make under-forecasting demurrage ($50k+/day) more severe than idle union gangs ($42k/gang).",
+      "Review triggers: Quarterly reviews; trigger early review if rolling 3-month MAPE > 6.2%, or errors keep same sign 3 months in a row.",
+      "Human sign-off: Human planners sign off on every binding commitment (Industry 5.0)."
+    ],
+    detailedDefenseScript: "Our operational recommendation translates directly into port capacity commitments: use ARIMA (1,1,0) as the primary one-month-ahead forecast, rolled forward monthly upon receiving latest actuals, with ETS α=0.50 maintained in Excel as a spreadsheet backup. Because port cost data was unavailable, our industrial engineering judgment assumes an asymmetric cost penalty: vessel demurrage ($50,000+/day) and yard gridlock are far harder to recover from than a modest surplus shift. Therefore, management commits firm resources to the ARIMA forecast and arranges a flexible ~5% capacity buffer (overtime, on-call gangs, standby yard cranes) matching ARIMA's 4.7% validation error, with an escalation route to 10%. We mandate quarterly reviews, an automatic early review if rolling 3-month MAPE exceeds 6.2% or shows directional bias for three consecutive months, and human sign-off on every binding roster.",
+    keyFormulas: [
+      "Capacity Target = ARIMA_t × (1 + Buffer_pct) where Buffer_pct ≈ 5% (Escalation to 10%)",
+      "Early Review Trigger: Rolling 3-Month MAPE > 6.22% (ETS Baseline Threshold)",
+      "Demurrage Loss > Idle Crew Shift Cost (Asymmetric Cost Assumption)"
+    ],
+    rubricCriterion: "Part VIII: Managerial Decision & Strategic Recommendation (20 pts)"
+  }
+];
+
+export interface ScoredRubricPillar {
+  title: string;
+  weight: number;
+  score: number;
+  coreCriteria: {
+    name: string;
+    description: string;
+    verifiedFigure: string;
+    pts: number;
+  }[];
+}
+
+export const SCORED_DEFENSE_RUBRIC: ScoredRubricPillar[] = [
+  {
+    title: "Mathematical Rigor",
+    weight: 35,
+    score: 35,
+    coreCriteria: [
+      {
+        name: "Window Sizing & Weight Summation",
+        description: "Fixed k=3 compliance on SMA and WMA; weights 0.50, 0.30, 0.20 summing strictly to 1.00.",
+        verifiedFigure: "w1 + w2 + w3 = 1.000",
+        pts: 10
+      },
+      {
+        name: "Recursive Smoothing Updates",
+        description: "Exact recursive exponential smoothing formula F_t = F_{t-1} + α(A_{t-1} - F_{t-1}) starting at F_1 = A_1.",
+        verifiedFigure: "ETS α=0.50 dev MAE: 30,596 TEUs",
+        pts: 10
+      },
+      {
+        name: "Time-Series Differencing & AIC",
+        description: "Proper stationarity differencing (d=1) and AIC order ranking (AIC 701.43).",
+        verifiedFigure: "ARIMA (1,1,0) AIC: 701.43",
+        pts: 8
+      },
+      {
+        name: "6-Metric Calculation Accuracy",
+        description: "Precise formulas for MAE, MSE, RMSE, MAPE, SMAPE, and directional MPE.",
+        verifiedFigure: "MPE = mean((A_t - F_t) / A_t) × 100",
+        pts: 7
+      }
+    ]
+  },
+  {
+    title: "Validation Integrity",
+    weight: 35,
+    score: 35,
+    coreCriteria: [
+      {
+        name: "Chronological Partitioning",
+        description: "Strict split into 30 development months (Jan 2022–Jun 2024) and 6 validation months (Jul–Dec 2024). Zero data leakage.",
+        verifiedFigure: "30 Dev vs 6 Holdout Months",
+        pts: 12
+      },
+      {
+        name: "Pre-Validation Baseline Locking",
+        description: "ETS α=0.50 locked as baseline before validation data release; ETS α=0.80 kept as runner-up despite 22,952 val MAE.",
+        verifiedFigure: "ETS α=0.50 locked at dev MAE 30,596",
+        pts: 10
+      },
+      {
+        name: "Rolling 1-Period-Ahead Simulation",
+        description: "Out-of-sample holdout scored strictly 1-month-ahead without model retraining or future look-ahead.",
+        verifiedFigure: "6 Unseen Out-of-Sample Observations",
+        pts: 8
+      },
+      {
+        name: "Scientific Humility & Naive Reference",
+        description: "Acknowledging 6-month sample limitation and comparing with naive repeat-last-month reference (MAE 19,944).",
+        verifiedFigure: "Naive Reference: MAE 19,944 (4.48%)",
+        pts: 5
+      }
+    ]
+  },
+  {
+    title: "Practical Decision-Making",
+    weight: 30,
+    score: 30,
+    coreCriteria: [
+      {
+        name: "Port Capacity Translation",
+        description: "Translating statistical numbers directly into physical berth allocation, ILWU labor gangs, and yard staging.",
+        verifiedFigure: "Container TEUs at Port of LA",
+        pts: 10
+      },
+      {
+        name: "Floor Plus ~5% Flexible Buffer",
+        description: "Commit firm resources to ARIMA; maintain ~5% flexible capacity buffer matching 4.7% validation error (escalation to 10%).",
+        verifiedFigure: "+5% to +8% Buffer (Escalation to 10%)",
+        pts: 8
+      },
+      {
+        name: "Asymmetric Demurrage Cost Logic",
+        description: "Explicit assumption that under-forecasting demurrage ($50k+/day) is more costly than idle union gangs ($42k/shift).",
+        verifiedFigure: "Asymmetric Cost Risk Assumption",
+        pts: 6
+      },
+      {
+        name: "Industry 5.0 Governance & Review Triggers",
+        description: "Quarterly reviews, early review if rolling 3-mo MAPE > 6.2%, ETS spreadsheet cross-check, and human sign-off.",
+        verifiedFigure: "Rolling 3-Mo MAPE > 6.2% Trigger",
+        pts: 6
+      }
+    ]
   }
 ];

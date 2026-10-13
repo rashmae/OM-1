@@ -192,7 +192,7 @@ export const DataAndCodeInspector: React.FC<DataAndCodeInspectorProps> = ({
       computeMetrics(r => r.sma3!, "3-Period SMA", "Conventional", "Universally understood; zero parameter tuning needed.", "Heavy lag behind sharp post-peak seasonal shifts and recoveries.", "Low"),
       computeMetrics(r => r.laggedLr!, "Lagged Linear Regression (t-1, t-2, t-3)", "Statistical", "Statistically weighted lag features provide multi-period linear projection.", "Weights fixed by in-sample normal equations; slower to catch sudden rebounds.", "Moderate"),
       computeMetrics(r => r.randomForest!, "Random Forest Regression", "Machine Learning", "Zero assumptions of linearity; fits complex non-linear nuances.", "Overfits small-sample time series (N=30); cannot extrapolate trends beyond bounds.", "High"),
-      computeMetrics(r => r.trend!, "Trend Projection (Linear Regression)", "Conventional", "Captures macro multi-year trade line slope.", "Severely distorted by Feb 2023 dip (-2,216 TEUs/month slope); fails completely on rebound.", "Low"),
+      computeMetrics(r => r.trend!, "Trend Projection (Linear Regression)", "Conventional", "Captures macro multi-year trade line slope.", "Severely distorted by Feb 2023 dip (downward linear slope); fails completely on rebound.", "Low"),
     ];
 
     // Sort by MAPE and assign ranks
@@ -720,6 +720,101 @@ print(scorecard)
             </div>
           </div>
 
+          {/* Official 6-Metric Formula Breakdown Card */}
+          <div className="bg-[#0B2545]/90 border border-[#1B6CA8]/50 rounded-2xl p-5 shadow-xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div className="flex items-center gap-2">
+                <Calculator className="w-4 h-4 text-sky-400" />
+                <h4 className="text-sm font-bold text-white">
+                  Official Operations Management Forecasting Metric Formulas
+                </h4>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">
+                MPE: Positive = Under-forecast
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-sky-300">1. Mean Absolute Error (MAE)</span>
+                  <span className="text-[10px] font-mono text-slate-400">Physical TEUs</span>
+                </div>
+                <div className="p-2 rounded bg-slate-900 border border-slate-800/80 font-mono text-xs text-amber-300">
+                  MAE = (1/n) · Σ |A_t - F_t|
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  Measures average magnitude of absolute error in physical container units without squaring.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-sky-300">2. Mean Squared Error (MSE)</span>
+                  <span className="text-[10px] font-mono text-slate-400">TEUs²</span>
+                </div>
+                <div className="p-2 rounded bg-slate-900 border border-slate-800/80 font-mono text-xs text-amber-300">
+                  MSE = (1/n) · Σ (A_t - F_t)²
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  Heavily penalizes severe outlier misses that trigger berth congestion or emergency overtime.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-sky-300">3. Root Mean Squared Error (RMSE)</span>
+                  <span className="text-[10px] font-mono text-slate-400">Physical TEUs</span>
+                </div>
+                <div className="p-2 rounded bg-slate-900 border border-slate-800/80 font-mono text-xs text-amber-300">
+                  RMSE = √[ (1/n) · Σ (A_t - F_t)² ]
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  Standard deviation of forecast residuals; expressed in original physical TEU scale.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-sky-300">4. Mean Absolute Percentage Error (MAPE)</span>
+                  <span className="text-[10px] font-mono text-slate-400">Scale-Independent</span>
+                </div>
+                <div className="p-2 rounded bg-slate-900 border border-slate-800/80 font-mono text-xs text-amber-300">
+                  MAPE = (100%/n) · Σ |(A_t - F_t) / A_t|
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  Relative percentage error benchmark used by terminal executives to compare port efficiency.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-sky-300">5. Symmetric MAPE (SMAPE)</span>
+                  <span className="text-[10px] font-mono text-slate-400">Bounded 0–200%</span>
+                </div>
+                <div className="p-2 rounded bg-slate-900 border border-slate-800/80 font-mono text-xs text-amber-300">
+                  SMAPE = (100%/n) · Σ [ 2|A_t - F_t| / (|A_t| + |F_t|) ]
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  Symmetric percentage error that treats positive and negative forecasts with mathematical symmetry.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-emerald-500/30 bg-emerald-950/10 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-emerald-300">6. Mean Percentage Error (MPE / Bias)</span>
+                  <span className="text-[10px] font-mono text-emerald-400 font-bold">Directional Bias</span>
+                </div>
+                <div className="p-2 rounded bg-slate-900 border border-emerald-500/40 font-mono text-xs text-emerald-300">
+                  MPE = (100%/n) · Σ [ (A_t - F_t) / A_t ]
+                </div>
+                <p className="text-[11px] text-slate-300">
+                  Directional bias indicator: <strong>Positive MPE means under-forecast</strong> (Actual &gt; Forecast); negative MPE means over-forecast.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Development (In-Sample Months 4-30) Baseline Selection Table */}
           <div className="bg-[#0B2545]/90 border border-[#1B6CA8]/50 rounded-2xl p-5 shadow-xl space-y-3">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
@@ -825,7 +920,7 @@ print(scorecard)
                 { id: '03_SMA3', title: '03: SMA (3-Period)', tag: '9.71% Dev' },
                 { id: '04_WMA3', title: '04: WMA (0.5/0.3/0.2)', tag: '9.31% (Winner)' },
                 { id: '05_EXP_SMOOTHING', title: '05: Exp Smoothing', tag: '3 Alphas' },
-                { id: '06_TREND_LINE', title: '06: Linear Trend', tag: 'Slope -2,216' },
+                { id: '06_TREND_LINE', title: '06: Linear Trend', tag: 'Linear Slope' },
                 { id: '07_IN_SAMPLE_DEV', title: '07: Dev Scorecard', tag: 'Part V Evidence' },
                 { id: '08_VALIDATION', title: '08: Validation (6-Mo)', tag: 'Jul–Dec 2024' },
                 { id: '09_FINAL_COMPARISON', title: '09: Final 6-Metric', tag: 'All Contenders' },
@@ -965,9 +1060,9 @@ print(scorecard)
                   </span>
                 </div>
                 <div className="p-4 bg-slate-950 rounded-xl border border-slate-800 font-mono text-xs space-y-1.5">
-                  <div className="text-sky-300 font-bold">Trend Equation: y_t = 411,620.96 - 2,216.33 × t</div>
+                  <div className="text-sky-300 font-bold">Trend Equation: Linear Regression y_t = a + b × t</div>
                   <div className="text-slate-400">Sum X = 465 | Sum Y = 11,202,933.80 | Sum XY = 169,044,383.15 | Sum X^2 = 9,455</div>
-                  <div className="text-slate-400">Slope b = -2,216.33 TEUs/period | Intercept a = 411,620.96 TEUs | Correlation r = -0.39</div>
+                  <div className="text-slate-400">Downward Slope Fit | Intercept a = 411,620.96 TEUs | Correlation r = -0.39</div>
                   <div className="text-red-400 font-bold">Month 36 (Dec 2024) Trend Forecast = 331,833.08 TEUs vs Actual = 460,304.25 TEUs (Error: -128,471 TEUs)</div>
                 </div>
               </div>

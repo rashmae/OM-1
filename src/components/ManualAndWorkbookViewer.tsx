@@ -311,7 +311,7 @@ export const ManualAndWorkbookViewer: React.FC<ManualAndWorkbookViewerProps> = (
                 <tr>
                   <td className="py-2.5 px-4 font-semibold text-slate-300">Trend Projection Dev Result</td>
                   <td className="py-2.5 px-4 font-mono text-slate-200">
-                    y_t = 411,620.96 - 2,216.33*t | MAE = 35,201.27 | RMSE = 45,232.84 | MAPE = 10.12% (r = -0.39)
+                    y_t = a + b*t (Linear Fit) | MAE = 35,201.27 | RMSE = 45,232.84 | MAPE = 10.12% (r = -0.39)
                   </td>
                 </tr>
                 <tr className="bg-sky-500/20 font-bold border-y-2 border-sky-400/50">
@@ -537,7 +537,7 @@ export const ManualAndWorkbookViewer: React.FC<ManualAndWorkbookViewerProps> = (
                 B. Conventional Forecasting
               </h4>
               <p className="text-xs text-slate-200 leading-relaxed">
-                <strong>1–5 Summary:</strong> Across months 1 to 30, Exponential Smoothing with α=0.50 achieved the lowest development error across all conventional methods (MAE 30,596 TEUs, RMSE 38,534 TEUs, MAPE 8.80%), while 3-Period WMA delivered 32,142 MAE (9.31% MAPE). Trend projection had the worst fit (MAE 35,201, MAPE 10.12%, r = -0.39) because the Feb 2023 shock tilted the trend line rigidly downward (-2,216 TEUs/month), making it an operational hazard. Group 7 officially locked ETS α=0.50 as the conventional baseline prior to receiving validation data.
+                <strong>1–5 Summary:</strong> Across months 1 to 30, Exponential Smoothing with α=0.50 achieved the lowest development error across all conventional methods (MAE 30,596 TEUs, RMSE 38,534 TEUs, MAPE 8.80%), while 3-Period WMA delivered 32,142 MAE (9.31% MAPE). Trend projection had the worst fit (MAE 35,201, MAPE 10.12%, r = -0.39) because the Feb 2023 shock tilted the trend line rigidly downward, making it an operational hazard. Group 7 officially locked ETS α=0.50 as the conventional baseline prior to receiving validation data.
               </p>
             </div>
 
